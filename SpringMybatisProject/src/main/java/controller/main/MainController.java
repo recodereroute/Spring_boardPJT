@@ -1,5 +1,7 @@
 package controller.main;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import command.LogInCommand;
 import command.MemberCommand;
 import service.goods.GoodsListService;
+import service.main.CookieService;
 import service.main.FindPasswordService;
 import service.main.IdFindFinishService;
 
@@ -20,6 +23,8 @@ public class MainController {
 	IdFindFinishService idFindFinishService;
 	@Autowired
 	FindPasswordService findPasswordService;
+	@Autowired
+	CookieService cookieService;
 	@RequestMapping("search/findPasswordPro")
 	public String findPasswordPro(MemberCommand memberCommand, Model model) {
 		String path = findPasswordService.findPassword(memberCommand, model);
@@ -39,8 +44,10 @@ public class MainController {
 		return "main/idSearch";
 	}
 	@RequestMapping("main")
-	public String aaa(@ModelAttribute LogInCommand logInCommand, Model model) {
-		goodsListService.goodsList(model);
+	public String aaa(@ModelAttribute LogInCommand logInCommand, Model model, 
+						HttpServletRequest request) {
+		cookieService.getCookie(request);
+		goodsListService.goodsList(model, null);
 		return "main/main";
 	}
 }

@@ -58,8 +58,9 @@ public class GoodsController {
 		return "goods/goodsJoin";
 	}
 	@RequestMapping("goodsList")
-	public String list(Model model) {
-		goodsListService.goodsList(model);
+	public String list(@RequestParam(value="page", defaultValue="1")Integer page,
+					Model model) {
+		goodsListService.goodsList(model, page);
 		return "goods/goodsList";
 	}
 	// jsp 화면에 있던 쿼리스트링값을 받아오려면 requestParam을 이용

@@ -201,13 +201,22 @@
 	where PROD_NUM = #{prodNum}
 </select>
 
-<select id="goodsList" resultType="gd">
-	select PROD_NUM prodNum, PROD_NAME prodName, PROD_PRICE prodPrice,
-		PROD_IMAGE prodImage, PROD_DETAIL prodDetail, 
-		PROD_CAPACITY prodCapacity, PROD_SUPPLYER prodSupplyer, 
-		PROD_DEL_FEE prodDelFee, RECOMMEND recommend, 
-		EMPLOYEE_ID employeeId, CTGR ctgr
-	from products
+<select id="goodsList" resultType="gd" parameterType="gd">
+	select rn, prodNum, prodName, prodPrice, prodImage, 
+		   prodDetail, prodCapacity, prodSupplyer, prodDelFee,
+		   recommend, employeeId, ctgr
+	from(select rownum rn, PROD_NUM prodNum, PROD_NAME prodName, PROD_PRICE prodPrice,
+				PROD_IMAGE prodImage, PROD_DETAIL prodDetail, 
+				PROD_CAPACITY prodCapacity, PROD_SUPPLYER prodSupplyer, 
+				PROD_DEL_FEE prodDelFee, RECOMMEND recommend, 
+				EMPLOYEE_ID employeeId, CTGR ctgr
+		 from products
+	)
+	<where>
+		<if test="startEndPageDTO != null">
+			rn between #{startEndPageDTO.startRow} and #{startEndPageDTO.endRow}
+		</if>
+	</where>
 </select>
 <insert id="goodsWrite" parameterType="gd">
 	insert into products(PROD_NUM, PROD_NAME, PROD_PRICE,PROD_IMAGE,
@@ -217,4 +226,7 @@
 	#{prodDetail},#{prodCapacity},#{prodSupplyer},#{prodDelFee},
 	#{recommend},#{employeeId},#{ctgr})
 </insert>
+<select id="count" resultType="int">
+	select count(*) from products
+</select>
 </mapper>

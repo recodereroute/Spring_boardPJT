@@ -44,9 +44,17 @@
 	where EMPLOYEE_ID = #{empId}
 </select>
 
-<select id="empList" resultType="empDTO">
-	select  <include refid="baseColumn" />
-	from employees
+<select id="empList" resultType="empDTO" parameterType="empDTO">
+	select rn, employeeId, empUserId, empPw, empName, hireDate, jobId,
+		   phNumber, officeNumber, email, empAddress
+	from(
+		select  rownum rn, <include refid="baseColumn" />
+		from employees
+	)
+	where rn between #{startEndPageDTO.startRow} and #{startEndPageDTO.endRow}
+</select>
+<select id="count" resultType="int">
+	select count(*) from employees
 </select>
 
 <insert id="empInsert" parameterType="empDTO">

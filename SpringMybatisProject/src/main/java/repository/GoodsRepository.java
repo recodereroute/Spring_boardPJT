@@ -96,9 +96,13 @@ public class GoodsRepository {
 		statement = namespace + ".goodsNum";
 		return sqlSession.selectOne(statement);
 	}
-	public List<GoodsDTO> goodsList() {
+	public List<GoodsDTO> goodsList(GoodsDTO dto) {
 		statement = namespace + ".goodsList";
 		return sqlSession.selectList(statement);
+	}
+	public int count() {
+		statement = namespace + ".count";
+		return sqlSession.selectOne(statement);
 	}
 	public void goodsWrite(GoodsDTO dto) {
 		statement = namespace + ".goodsWrite";
