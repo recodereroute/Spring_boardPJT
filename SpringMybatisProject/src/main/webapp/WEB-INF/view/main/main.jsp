@@ -57,8 +57,9 @@
 		<a href="goods/goodsList">상품리스트</a>
 		<a href="admin/noticeList">공지사항</a>
 		<a href="lib/libBoard">자료실</a>
-		<!-- 게시판은 연습용 주소 -->
+		<!-- 게시판 아래로는 연습용 주소 -->
 		<a href="board/boardList">게시판</a>
+		<a href="clientLib/clientLibList">고객의 소리</a>
 	</c:if>
 	<a href="login/logOut">logout</a>
 	<!-- 

@@ -8,7 +8,7 @@
 <title>noticeList.jsp</title>
 </head>
 <body>
-<table width = "300" border="1">
+<table width = "400" border="1">
 	<tr><td>번호</td><td>제목</td><td>등록일</td><td>조회수</td></tr>
 	<c:forEach items="${lists }" var = "dto" varStatus="cnt">
 	<tr><td>${cnt.count }</td>

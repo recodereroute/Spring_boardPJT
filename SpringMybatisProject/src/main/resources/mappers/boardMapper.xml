@@ -2,8 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mappers.boardMapper">
+<sql id="baseColumns">
+	notice_no noticeNo, notice_sub noticeSub, notice_con noticeCon, NOTICE_DATE noticeDate,
+	NOTICE_KIND noticeKind, NOTICE_FILE, NOTICE_COUNT noticeCount, EMPLOYEE_ID employeeId
+</sql>
 
-
+<delete id="delete" parameterType="string">
+	delete from notice
+	where notice_no = #{boardNo}
+</delete>
+<update id="modify" parameterType="bd">
+	update notice
+	set notice_con = #{noticeCon}, notice_sub = #{noticeSub}
+	where notice_no = #{noticeNo}
+</update>
 <select id="counting" resultType="string">
 	select nvl(max(notice_no), 0) + 1 from notice
 </select>
@@ -12,4 +24,19 @@
 						NOTICE_KIND, NOTICE_FILE, NOTICE_COUNT, EMPLOYEE_ID)
 	values (#{noticeNo},#{noticeSub},#{noticeCon},sysdate,#{noticeKind},null,0,#{employeeId})
 </insert>
+<select id="list" resultType="bd">
+	select <include refid="baseColumns"/>
+	from notice
+	where notice_kind = '게시판'
+</select>
+<update id="count" parameterType="string">
+	update notice
+	set notice_count = notice_count + 1
+	where notice_no = #{boardNo}
+</update>
+<select id="detail" parameterType="string" resultType="bd">
+	select <include refid="baseColumns"/>
+	from notice
+	where notice_no = #{boardNo}
+</select>
 </mapper>

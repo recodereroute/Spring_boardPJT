@@ -6,5 +6,6 @@
 		<typeAlias type="Model.GoodsDTO" alias="gd"/>
 		<typeAlias type="Model.EmployeeDTO" alias = "empDTO"/>
 		<typeAlias type="Model.BoardDTO" alias = "bd"/>
+		<typeAlias type="Model.ClientLibDTO" alias="cliDto"/>
 	</typeAliases>
 </configuration>

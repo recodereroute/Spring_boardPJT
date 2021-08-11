@@ -39,7 +39,10 @@ public class LibraryWriteService {
 				String originalExt = original.substring(original.lastIndexOf("."));
 				//저장되는 파일 이름
 				String store = UUID.randomUUID().toString().replace("-", "") + originalExt;
-				//KB 단위
+				//KB 단위 - 왜 안나눠지는지 ?
+				System.out.println("mf size : "+ mf.getSize());
+				System.out.println("mf size / 1024 : "+mf.getSize()/1024);
+				System.out.println("mf size / 1024**2 : "+mf.getSize()/(1024*1024));
 				String fileSize = Long.toString(mf.getSize()/1024);
 				originalTotal += original +",";
 				storeTotal += store + ",";
@@ -57,7 +60,6 @@ public class LibraryWriteService {
 				dto.setNoticeFileSize(fileSizeTotal);
 			}
 		}
-		
 		libraryRepository.libWrite(dto);
 	}
 }

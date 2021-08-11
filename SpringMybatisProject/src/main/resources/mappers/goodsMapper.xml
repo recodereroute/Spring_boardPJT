@@ -65,6 +65,8 @@
 		<result column="REVIEW_IMG" jdbcType="VARCHAR" property="reviewImg"/>
 	</collection>
 </resultMap>
+
+
 <delete id="cartRemove" parameterType="hashMap">
 	delete from cart
 	<where>

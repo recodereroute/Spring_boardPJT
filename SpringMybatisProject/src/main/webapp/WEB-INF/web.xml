@@ -34,6 +34,7 @@
   			classpath:spring-notice.xml
   			classpath:spring-lib.xml
   			classpath:spring-board.xml
+  			classpath:spring-clientLib.xml
   		</param-value>
   	</init-param>
   </servlet>

@@ -47,8 +47,8 @@ public class LibraryController {
 		return "redirect:libBoard";
 	}
 	@RequestMapping(value = "libModify", method = RequestMethod.POST)
-	public String libModify(LibraryCommand libraryCommand, Model model) {
-		libraryModifyService.libModify(libraryCommand, model);
+	public String libModify(LibraryCommand libraryCommand, HttpSession session) {
+		libraryModifyService.libModify(libraryCommand, session);
 		return "redirect:libraryInfo?noticeNo="+libraryCommand.getNoticeNo();
 	}
 	@RequestMapping("libDetail")

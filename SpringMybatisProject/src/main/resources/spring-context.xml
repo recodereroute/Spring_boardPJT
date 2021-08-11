@@ -63,6 +63,10 @@
 			<mvc:mapping path="/admin/**"/>
 			<bean class="interceptor.AuthCheckInterceptor" />
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/clientLib/**"/>
+			<bean class="interceptor.AuthCheckInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 	
 	<bean id="messageSource" 

@@ -13,6 +13,11 @@ import service.goods.GoodsReviewsService;
 public class GoodsViewController {
 	@Autowired
 	GoodsReviewsService goodsReviewsService;
+	@RequestMapping("goodsWishAdd")
+	public String goodsWishAdd(@RequestParam(value="prodNum")String prodNum) {
+		
+		return "goods/wish";
+	}
 	@RequestMapping("goodsView")
 	public String goodsView(@RequestParam(value="prodNum")String prodNum, Model model) {
 		goodsReviewsService.goodsReviews(prodNum, model);

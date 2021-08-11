@@ -30,11 +30,36 @@ $(function(){
 			}
 		});
 	});
+	$("#wishBtn").click(function(){
+		$.ajax({
+			type:"POST",
+			url:"goodsWishAdd",
+			data : {"prodNum": "${goodsReviews.goods.prodNum}"},
+			dataType : "text",
+			success:function(result){
+				if(result.trim()=="1"){
+					$("#wishBtn").attr("src","../images/right_arrow.png");
+					alert("관심상품에 등록되었습니다.")
+				}else{
+					$("#wishBtn").attr("src","../images/left_arrow.png");
+					alert("관심상품이 해지되었습니다.")
+				}
+			},
+			error:function(){
+				alert("로그아웃 되었습니다.\n다시 로그인 해주세요.");
+				location.href="../main";
+				return;
+			}
+		});
+	});
 });
 </script>
 </head>
 <body>
 <table>
+	<tr><td colspan="6">
+		관심상품<img src="../images/left_arrow.png" id="wishBtn" />
+	</td></tr>
 	<tr><td rowspan="5">
 	<img src ="../goods/upload/${goodsReviews.goods.prodImage.split(',')[0]}" width="500"/></td>
 									 <td>상품명 : ${goodsReviews.goods.prodName }</td></tr>
